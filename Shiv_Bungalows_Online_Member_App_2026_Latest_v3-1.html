@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#173b8f">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23173b8f'/%3E%3Cpath d='M8 29 32 9l24 20v25H8V29Z' fill='white'/%3E%3Cpath d='M32 21c4 7 4 11 0 15-4-4-4-8 0-15Z' fill='%23e5ad28'/%3E%3Cpath d='M27 36h10v11H27z' fill='%23173b8f'/%3E%3C/svg%3E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="શિવ બંગલોઝ">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="description" content="શિવ બંગલોઝ 92 મકાન Online Member App 2026">
+
+<title>શિવ બંગલોઝ — New Version</title>
+<style>
+:root{--blue:#173b8f;--blue2:#2857c5;--gold:#e5ad28;--bg:#f4f7fc;--text:#172033;--muted:#6c7890;--card:#fff;--green:#198754;--red:#dc3545}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Arial,"Noto Sans Gujarati",sans-serif;color:var(--text)}
+.app{max-width:520px;margin:auto;min-height:100vh;background:var(--bg)}
+header{background:linear-gradient(135deg,var(--blue),#10245c);color:white;padding:22px 18px 18px;border-radius:0 0 28px 28px;box-shadow:0 8px 24px #173b8f2b}
+.brand{display:flex;align-items:center;gap:13px}.logo{width:62px;height:62px;border-radius:18px;background:#fff;display:grid;place-items:center;box-shadow:0 5px 15px #0003}
+.logo svg{width:48px;height:48px}.title{font-size:24px;font-weight:800}.sub{font-size:12px;opacity:.82;margin-top:3px}
+.version{margin-top:15px;display:inline-block;background:#ffffff1c;border:1px solid #ffffff40;padding:6px 11px;border-radius:20px;font-size:12px}
+main{padding:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{background:var(--card);border-radius:18px;padding:16px;box-shadow:0 5px 18px #1c2d4a0d;border:1px solid #e7ebf3}
+.action{cursor:pointer;min-height:118px;transition:.15s}.action:active{transform:scale(.98)}
+.icon{font-size:30px}.action h3{margin:9px 0 4px;font-size:16px}.action p{margin:0;color:var(--muted);font-size:12px;line-height:1.4}
+.section{margin-top:16px}.section h2{font-size:18px;margin:0 0 10px}.row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #edf0f5}.row:last-child{border:0}.badge{padding:5px 9px;border-radius:20px;font-size:11px;background:#eef3ff;color:var(--blue);font-weight:700}
+button{border:0;border-radius:12px;padding:10px 14px;font-weight:700;background:var(--blue);color:white;cursor:pointer}button.secondary{background:#eef2f8;color:var(--blue)}
+input,textarea,select{width:100%;padding:12px;border:1px solid #dce2ec;border-radius:12px;margin:7px 0 10px;font-size:14px;background:white}textarea{min-height:90px;resize:vertical}
+.modal{display:none;position:fixed;inset:0;background:#09122a99;align-items:flex-end;justify-content:center;z-index:10}.modal.open{display:flex}.sheet{width:min(520px,100%);background:white;border-radius:25px 25px 0 0;padding:20px;max-height:88vh;overflow:auto}.sheet h2{margin-top:0}.close{float:right;background:#eef2f8;color:#333}
+.nav{position:sticky;bottom:0;background:#fff;border-top:1px solid #e5e9f1;padding:10px 12px;display:flex;justify-content:space-around}.nav button{background:transparent;color:var(--muted);padding:7px;font-size:11px}.nav button.active{color:var(--blue)}
+.empty{color:var(--muted);font-size:13px;padding:8px 0}.small{font-size:12px;color:var(--muted)}
+</style>
+<style>
+#loginScreen{position:fixed;inset:0;background:linear-gradient(135deg,#10245c,#2857c5);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}
+.loginBox{width:min(420px,100%);background:#fff;border-radius:24px;padding:24px;box-shadow:0 18px 50px #0004}
+.loginLogo{width:70px;height:70px;margin:auto;border-radius:20px;background:#eef3ff;display:grid;place-items:center;font-size:38px}
+.loginBox h1{text-align:center;color:#173b8f;margin:10px 0 4px}.loginBox p{text-align:center;color:#6c7890;font-size:13px}
+.loginBox label{font-size:13px;font-weight:700}.loginBox button{width:100%;margin-top:4px}
+.loginError{display:none;color:#dc3545;background:#fff1f2;padding:9px;border-radius:10px;margin-top:10px;text-align:center;font-size:12px}
+.userBar{display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid #e7ebf3;border-radius:14px;padding:10px 12px;margin-bottom:12px}
+.userRole{font-size:11px;color:#173b8f;font-weight:700}.logoutBtn{background:#eef2f8;color:#173b8f;padding:7px 10px}
+.memberOnly{display:none}
+</style></head>
+<body><div id="loginScreen">
+ <div class="loginBox">
+  <div class="loginLogo">🏡</div>
+  <h1>શિવ બંગલોઝ</h1>
+  <p>Online Member App • 2026 • Online Ready</p>
+  <label>User ID</label>
+  <input id="loginUser" placeholder="User ID" autocomplete="username" autocapitalize="none">
+  <label>Password</label>
+  <input id="loginPass" type="password" placeholder="Password" autocomplete="current-password">
+  <button type="button" onclick="doLogin()">🔐 Login</button>
+  <button type="button" class="secondary" style="width:100%;margin-top:10px" onclick="showForgotPassword()">🔑 Forgot Password?</button>
+  <div id="loginError" class="loginError">User ID અથવા Password ખોટો છે.</div>
+  <p style="margin-top:14px">👑 પ્રમુખ Admin: <b>pramukh</b> / <b>shiv2026</b></p>
+  <p class="small">સભ્ય: <b>house001</b> / <b>shiv001</b> થી house092 સુધી</p>
+ </div>
+</div>
+
+<div id="forgotScreen" class="modal" style="z-index:10000">
+ <div class="sheet">
+  <button class="close" type="button" onclick="closeForgot()">✕</button>
+  <h2>🔑 Forgot Password</h2>
+  <p class="small">તમારું User ID પસંદ/લખો. સુરક્ષા માટે અહીં નવો પાસવર્ડ સેટ કરવાની પ્રક્રિયા સ્થાનિક ફોનમાં જ રહેશે.</p>
+  <label>User ID</label>
+  <input id="forgotUser" placeholder="pramukh અથવા house001">
+  <label>નવો Password</label>
+  <input id="forgotNewPass" type="password" placeholder="નવો પાસવર્ડ">
+  <label>ફરી Password</label>
+  <input id="forgotConfirmPass" type="password" placeholder="ફરીથી પાસવર્ડ">
+  <button type="button" onclick="resetPassword()">🔄 Password Reset</button>
+  <div id="forgotMsg" class="small" style="margin-top:10px"></div>
+ </div>
+</div>
+
+<div class="app">
+<header>
+  <div class="brand">
+    <div class="logo">
+      <svg viewBox="0 0 64 64" fill="none" aria-label="Shiv Bungalows logo">
+        <path d="M8 29 32 9l24 20v25H8V29Z" fill="#173b8f"/>
+        <path d="M15 29 32 15l17 14v18H15V29Z" fill="white"/>
+        <path d="M32 21c4 7 4 11 0 15-4-4-4-8 0-15Z" fill="#e5ad28"/>
+        <path d="M27 36h10v11H27z" fill="#173b8f"/>
+        <circle cx="32" cy="39" r="3" fill="#e5ad28"/>
+      </svg>
+    </div>
+    <div><div class="title">શિવ બંગલોઝ</div><div class="sub">Society Management • Smart Community</div></div>
+  </div>
+  <div class="version">NEW VERSION • 2026 • ONLINE READY</div>
+</header>
+
+<main><div class="userBar"><div>👤 <b id="loggedUserName">સભ્ય</b><br><span class="userRole" id="loggedUserRole">Member</span></div><button class="logoutBtn" onclick="logout()">Logout</button></div>
+    <div class="card adminOnly" style="display:none;margin-bottom:12px">👑 <b>Admin Mode</b><div class="small">Admin Login સક્રિય છે.</div></div>
+  <div class="grid">
+    <div class="card action" onclick="openModal('maintenance')"><div class="icon">💰</div><h3>મેન્ટેનન્સ</h3><p>નાઈન્ટી-ટુ (92) મકાનના નામ, ઘર નંબર અને મેન્ટેનન્સ નોંધો.</p></div>
+    <div class="card action" onclick="openModal('complaint')"><div class="icon">🛠️</div><h3>ફરિયાદ બોક્સ</h3><p>નામ, નંબર, મોબાઈલ નંબર અને ફોટા સાથે ફરિયાદ નોંધો.</p></div>
+    <div class="card action" onclick="openModal('committee')"><div class="icon">👥</div><h3>કમિટી મેમ્બરો</h3><p>પ્રમુખ, મંત્રી અને સભ્યોની માહિતી.</p></div>
+    <div class="card action" onclick="openModal('meeting')"><div class="icon">📋</div><h3>મિટિંગ</h3><p>આજની તથા આગામી મિટિંગની નોંધ.</p></div>
+    <div class="card action" onclick="openModal('reminder')"><div class="icon">🔔</div><h3>રિમાઈન્ડર</h3><p>મેન્ટેનન્સ અને મિટિંગ માટે યાદ અપાવો.</p></div>
+    <div class="card action" onclick="openModal('extra')"><div class="icon">➕</div><h3>વધારાનું મેન્ટેનન્સ</h3><p>વિશેષ કામ માટે અલગ ફંડ/નોંધ રાખો.</p></div>
+  </div>
+
+  <div class="section">
+    <h2>આજનું ડેશબોર્ડ</h2>
+    <div class="card">
+      <div class="row"><span>મેન્ટેનન્સ</span><span class="badge" id="maintCount">0 નોંધ</span></div>
+      <div class="row"><span>ફરિયાદો</span><span class="badge" id="compCount">0 ફરિયાદ</span></div>
+      <div class="row"><span>આગામી મિટિંગ</span><span class="badge">નોંધ ઉમેરો</span></div>
+      <div class="row"><span>રિમાઈન્ડર</span><span class="badge" id="remCount">0 યાદ અપાવણ</span></div>
+    </div>
+  </div>
+
+  
+  <div class="section">
+    <h2>💰 મેન્ટેનન્સ ફોલ્ડર — 92 મકાન</h2>
+    <div class="card">
+      <button onclick="sendAllMaintenanceMessages()" style="width:100%;margin-bottom:10px">📲 મેન્ટેનન્સ રિમાઈન્ડર મેસેજ</button>
+      <div class="small" style="margin-bottom:10px">✅ જમા કરો દબાવતા પેન્ડિંગ મેન્ટેનન્સની એન્ટ્રી આપમેળે દૂર થશે.</div>
+      <div class="row"><span><b>3 મહિના માટે મેન્ટેનન્સ</b><br><span class="small">1 થી 10 તારીખ સુધી ₹1,500 • 10 પછી ₹50 પેનલ્ટી સાથે • ઓટોમેટિક રિમાઈન્ડર</span></span><span class="badge">₹1,500</span></div>
+      <div id="residentList"></div>
+    </div>
+  </div>
+
+<div class="section">
+    <h2>ઝડપી કામગીરી</h2>
+    <div class="card">
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button onclick="openModal('maintenance')">+ મેન્ટેનન્સ</button>
+        <button onclick="openModal('complaint')">+ ફરિયાદ</button>
+        <button onclick="openModal('meeting')">+ મિટિંગ</button>
+        <button onclick="openModal('reminder')">+ રિમાઈન્ડર</button>
+      </div>
+      <p class="small" style="margin-bottom:8px">🌐 Online-ready: એપ Home Screen પર Install કરી શકાય છે. હાલની HTML ફાઇલમાં ડેટા ફોનમાં સ્થાનિક રીતે સાચવાય છે; 92 મકાનનું સાચું cloud sync કરવા માટે Google Sheets/Apps Script backend જોડવાનું રહેશે.</p>
+      <button class="secondary" style="width:100%" onclick="showInstallHelp()">📱 Home Screen પર ઉમેરવાની રીત</button>
+    </div>
+  </div>
+</main>
+
+<div class="nav">
+  <button class="active" onclick="window.scrollTo({top:0,behavior:'smooth'})">🏠<br>હોમ</button>
+  <button onclick="openModal('maintenance')">💰<br>મેન્ટેનન્સ</button>
+  <button onclick="openModal('complaint')">🛠️<br>ફરિયાદ</button>
+  <button onclick="openModal('committee')">👥<br>કમિટી</button>
+</div>
+</div>
+
+<div class="modal" id="modal"><div class="sheet">
+<button class="close" onclick="closeModal()">✕</button><div id="modalContent"></div>
+</div></div>
+
+<script>
+const data={maintenance:[],complaint:[],meeting:[],reminder:[],extra:[]};
+function save(){localStorage.setItem('shivBungalows2026',JSON.stringify(data));updateCounts()}
+
+const residents = [{'house': 1, 'name': 'સંદીપભાઈ પ્રજાપતિ', 'phone': '8866403173'}, {'house': 2, 'name': 'જયેશભાઈ પ્રજાપતિ', 'phone': '9558105888'}, {'house': 3, 'name': 'રાહુલભાઈ પ્રજાપતિ', 'phone': '7567421289'}, {'house': 4, 'name': 'રોહિતસિંહ રાજપૂત', 'phone': '8469694618'}, {'house': 5, 'name': 'અંબાલાલ પટેલ પાલાસરવાળા', 'phone': '9429037961'}, {'house': 6, 'name': 'નવીનભાઈ પ્રજાપતિ', 'phone': '9998689774'}, {'house': 7, 'name': 'ભાવેશભાઈ પ્રજાપતિ', 'phone': '8849575935'}, {'house': 8, 'name': 'રતુલભાઈ જોશી', 'phone': '8128471618'}, {'house': 9, 'name': 'હિતેશભાઈ દરજી', 'phone': '8511551395'}, {'house': 10, 'name': 'ભગવાનભાઈ પ્રજાપતિ', 'phone': '7567904473'}, {'house': 11, 'name': 'મહિલા મંડળ', 'phone': ''}, {'house': 12, 'name': 'શંભુભાઈ પ્રજાપતિ', 'phone': '9727441993'}, {'house': 13, 'name': 'સતીશભાઈ જાદવ', 'phone': '9978313900'}, {'house': 14, 'name': 'વનરાજસિંહ વાઘેલા', 'phone': '9574579080'}, {'house': 15, 'name': 'જિગ્નેશભાઈ દવે', 'phone': '9510721620'}, {'house': 16, 'name': 'રવિભાઈ લિંબાચીયા', 'phone': '9978757383'}, {'house': 17, 'name': 'સેમાભાઈ પટેલ', 'phone': '9898498065'}, {'house': 18, 'name': 'ભાવેશભાઈ જોશી', 'phone': '9925769050'}, {'house': 19, 'name': 'જયદેવકુમાર દવે', 'phone': '9725305992'}, {'house': 20, 'name': 'બાબુભાઈ પ્રજાપતિ', 'phone': '9909845822'}, {'house': 21, 'name': 'ચંદ્રકાંત ઠક્કર', 'phone': '9723315642'}, {'house': 22, 'name': 'મુકેશભાઈ પ્રજાપતિ', 'phone': '8401536379'}, {'house': 23, 'name': 'ચેતનભાઈ સિંધવ', 'phone': '9974137541'}, {'house': 24, 'name': 'રાજેન્દ્રસિંહ રાજપૂત', 'phone': '9510027127'}, {'house': 25, 'name': 'કાર્તિકસિંહ પઢિયાર', 'phone': '9904385934'}, {'house': 26, 'name': 'વિજયકુમાર રાજગોર', 'phone': '9925559892'}, {'house': 27, 'name': 'ભરતભાઈ પ્રજાપતિ', 'phone': '9723104111'}, {'house': 28, 'name': 'લાલાભાઈ પ્રજાપતિ', 'phone': '7600023755'}, {'house': 29, 'name': 'હિતેન્દ્રસિંહ સોલંકી', 'phone': '9510708900'}, {'house': 30, 'name': 'પવનભાઈ જગીડ', 'phone': '7976354411'}, {'house': 31, 'name': 'જિગ્નેશભાઈ પંચાલ', 'phone': '9892287894'}, {'house': 32, 'name': 'મયુરભાઈ પટેલ', 'phone': '9924990879'}, {'house': 33, 'name': 'ગિરીશભાઈ', 'phone': '9558721076'}, {'house': 34, 'name': 'મહાવીરસિંહ વાઘેલા', 'phone': '9904976137'}, {'house': 35, 'name': 'રાજેશભાઈ પટેલ', 'phone': '9824868258'}, {'house': 36, 'name': 'વિશાલભાઈ પટેલ', 'phone': '9904948656'}, {'house': 37, 'name': 'ભીખાભાઈ પટેલ', 'phone': '6355768053'}, {'house': 38, 'name': 'કાનુભાઈ પટેલ', 'phone': '9924934272'}, {'house': 39, 'name': 'હિતેશભાઈ પ્રજાપતિ', 'phone': '9904613123'}, {'house': 40, 'name': 'ભાવેશભાઈ પટેલ', 'phone': '9724660761'}, {'house': 41, 'name': 'રોહિતભાઈ પ્રજાપતિ', 'phone': '9104859436'}, {'house': 42, 'name': 'કરણભાઈ જાની', 'phone': '8999642607'}, {'house': 43, 'name': 'સતીશભાઈ ચંપાનેરિ', 'phone': '9998117228'}, {'house': 44, 'name': 'લાલાભાઈ પટેલ', 'phone': '9978769640'}, {'house': 45, 'name': 'રિદ્ધિબેન રાવલ', 'phone': '9913685154'}, {'house': 46, 'name': 'દિલીપભાઈ મોદી', 'phone': '9904716502'}, {'house': 47, 'name': 'વ્યાસ દર્શનભાઈ', 'phone': ''}, {'house': 48, 'name': 'સૌરભભાઈ સથવારા', 'phone': '9824987302'}, {'house': 49, 'name': 'લાલાભાઈ એમ. નાયી', 'phone': '9624382353'}, {'house': 50, 'name': 'રોનિતભાઈ પ્રજાપતિ', 'phone': '8866553726'}, {'house': 51, 'name': 'રાવલ જયેશભાઈ', 'phone': '9428843382'}, {'house': 52, 'name': 'રાવલ વિપુલકુમાર બી.', 'phone': '9979318294'}, {'house': 53, 'name': 'હિતેશભાઈ જોશી', 'phone': '9998826600'}, {'house': 54, 'name': 'મહેશભાઈ મોદી', 'phone': '9824353098'}, {'house': 55, 'name': 'શૈલેશભાઈ સુથાર', 'phone': '9173092163'}, {'house': 56, 'name': 'અજીતસિંહ રાજપૂત', 'phone': '9974963526'}, {'house': 57, 'name': 'સુરેશભાઈ ડોડીયા', 'phone': '9585848581'}, {'house': 58, 'name': 'યશભાઈ ધગિયા', 'phone': '9429286644'}, {'house': 59, 'name': 'દિનેશભાઈ સોની', 'phone': '9898793149'}, {'house': 60, 'name': 'જોશીભાઈ', 'phone': '9427793555'}, {'house': 61, 'name': 'જિગ્નેશભાઈ પ્રજાપતિ', 'phone': '9173828037'}, {'house': 62, 'name': 'કુંદનભાઈ પ્રજાપતિ', 'phone': '9978855521'}, {'house': 63, 'name': 'પ્રશાંતભાઈ નાયક', 'phone': '8758842600'}, {'house': 64, 'name': 'જયેશભાઈ નડોડા', 'phone': '9510328908'}, {'house': 65, 'name': 'મનોજભાઈ પ્રજાપતિ', 'phone': '9376755278'}, {'house': 66, 'name': 'દર્શિતભાઈ જોશી', 'phone': '6352599184'}, {'house': 67, 'name': 'હિતેશભાઈ પટેલ', 'phone': '9913717770'}, {'house': 68, 'name': 'મહેન્દ્રસિંહ રાજપૂત', 'phone': '9773458636'}, {'house': 69, 'name': 'દિનેશભાઈ સિંધવ', 'phone': '9726379241'}, {'house': 70, 'name': 'હિમાંશુભાઈ દવે', 'phone': '9879211261'}, {'house': 71, 'name': 'જગમાલભાઈ પટેલ', 'phone': '9924556537'}, {'house': 72, 'name': 'ડોડીયા ગિરીશભાઈ એન.', 'phone': '8128117468'}, {'house': 73, 'name': 'હસમુખભાઈ ગામી', 'phone': '9925064817'}, {'house': 74, 'name': 'રમેશભાઈ પટેલ', 'phone': '9904926038'}, {'house': 75, 'name': 'અમિતભાઈ રાજપૂત', 'phone': '7043767275'}, {'house': 76, 'name': 'દીપકભાઈ પ્રજાપતિ', 'phone': '9825127735'}, {'house': 77, 'name': 'પાશાભાઈ રાઠોડ', 'phone': '9574829532'}, {'house': 78, 'name': 'મયુરભાઈ મોદી', 'phone': '7016351141'}, {'house': 79, 'name': 'પટેલ અર્જુનભાઈ', 'phone': '9429152087'}, {'house': 80, 'name': 'કૃષ્ણપસભાઈ પાલત', 'phone': '9913082306'}, {'house': 81, 'name': 'ડોડીયા દિનેશભાઈ', 'phone': '9825823642'}, {'house': 82, 'name': 'દશરથભાઈ જોશી', 'phone': '9712118648'}, {'house': 83, 'name': 'નરેશભાઈ પટેલ', 'phone': '9978422023'}, {'house': 84, 'name': 'સુરેશભાઈ મોદી', 'phone': '9870072284'}, {'house': 85, 'name': 'રાજેશભાઈ દવે', 'phone': '9328670247'}, {'house': 86, 'name': 'પંકજભાઈ જોશી', 'phone': '9824071255'}, {'house': 87, 'name': 'રોહિતભાઈ વ્યાસ', 'phone': '8141719019'}, {'house': 88, 'name': 'કુસુમબેન ઠક્કર', 'phone': '9313019244'}, {'house': 89, 'name': 'ભદ્રેશભાઈ વ્યાસ', 'phone': '9727377471'}, {'house': 90, 'name': 'કાનુભાઈ દરજી', 'phone': '9773258722'}, {'house': 91, 'name': 'પારેશભાઈ પ્રજાપતિ', 'phone': '9979401091'}, {'house': 92, 'name': 'રાકેશભાઈ નાયક', 'phone': '9265145851'}];
+function renderResidents(){
+ const el=document.getElementById('residentList');
+ if(!el)return;
+ el.innerHTML=residents.map(r=>`<div class="row">
+   <span><b>મકાન ${r.house}</b> — ${esc(r.name)}<br><small>📱 ${r.phone || 'મોબાઈલ નંબર ઉપલબ્ધ નથી'}</small></span>
+   <button class="secondary" onclick="sendMaintenanceMessage(${r.house})">મેસેજ</button>
+ </div>`).join('');
+}
+function sendMaintenanceMessage(house){
+ const r=residents.find(x=>x.house===house); if(!r)return;
+ const msg=`નમસ્કાર ${r.name}, શિવ બંગલોઝ મેન્ટેનન્સ અંગે વિનંતી: 3 મહિના માટે મેન્ટેનન્સ ₹1,500 છે. 1 થી 10 તારીખ સુધી જમા કરાવવાનું રહેશે. 10 તારીખ પછી ₹50 પેનલ્ટી સાથે મેન્ટેનન્સ ભરવાનું રહેશે. કૃપા કરીને સમયસર મેન્ટેનન્સ જમા કરાવશો. કમિટી પ્રમુખ, મંત્રી. આભાર.`;
+ if(r.phone){
+   window.open('https://wa.me/91'+r.phone+'?text='+encodeURIComponent(msg),'_blank');
+ }else{
+   alert(msg);
+ }
+}
+function sendAllMaintenanceMessages(){
+ const withPhone=residents.filter(r=>r.phone);
+ if(!withPhone.length){alert('મોબાઈલ નંબર ઉપલબ્ધ નથી.');return;}
+ if(!confirm('92 મકાનના મેસેજ એકસાથે ખોલવા છે?'))return;
+ withPhone.forEach((r,i)=>setTimeout(()=>{
+   const msg=`નમસ્કાર ${r.name}, શિવ બંગલોઝ મેન્ટેનન્સ અંગે વિનંતી: 3 મહિના માટે મેન્ટેનન્સ ₹1,500 છે. 1 થી 10 તારીખ સુધી જમા કરાવવાનું રહેશે. 10 તારીખ પછી ₹50 પેનલ્ટી સાથે મેન્ટેનન્સ ભરવાનું રહેશે. કૃપા કરીને સમયસર મેન્ટેનન્સ જમા કરાવશો. કમિટી પ્રમુખ, મંત્રી. આભાર.`;
+   window.open('https://wa.me/91'+r.phone+'?text='+encodeURIComponent(msg),'_blank');
+ },i*500));
+}
+
+function load(){try{Object.assign(data,JSON.parse(localStorage.getItem('shivBungalows2026')||'{}'))}catch(e){}updateCounts()}
+function updateCounts(){
+  document.getElementById('maintCount').textContent=data.maintenance.length+' નોંધ';
+  document.getElementById('compCount').textContent=data.complaint.length+' ફરિયાદ';
+  document.getElementById('remCount').textContent=data.reminder.length+' યાદ અપાવણ';
+}
+function openModal(type){
+ let c='';
+ if(type==='maintenance') c=`<h2>💰 મેન્ટેનન્સ — 92 મકાન</h2><label>મકાન નંબર</label><input id="mhouse" placeholder="મકાન નંબર"><label>મકાનનું નામ</label><input id="mname" placeholder="નામ"><label>મોબાઈલ નંબર</label><input id="mphone" type="tel" placeholder="મોબાઈલ નંબર"><label>મેન્ટેનન્સ રકમ</label><input id="mamt" type="number" value="1500" placeholder="₹"><div class="small" style="margin:6px 0 10px">📌 નિયમ: 3 મહિના ₹1,500. 1 થી 10 તારીખ સુધી જમા કરાવવાનું રહેશે. 10 તારીખ પછી ₹50 પેનલ્ટી સાથે ભરવાનું રહેશે.</div><button onclick="addMaintenance()">➕ સબમિટ / જમા કરો</button><div class="section"><div class="card"><b>નાઈન્ટી-ટુ (92) મકાનની યાદી</b><p class="small">દરેક મકાનનું નામ અને નંબર અહીં નોંધાવી શકાય છે.</p></div>${list('maintenance')}</div>`;
+ if(type==='complaint') c=`<h2>🛠️ ફરિયાદ બોક્સ</h2><label>નામ</label><input id="cname" placeholder="ફરિયાદ કરનારનું નામ"><label>ઘર નંબર</label><input id="chouse" placeholder="ઘર નંબર"><label>મોબાઈલ નંબર</label><input id="cphone" type="tel" placeholder="મોબાઈલ નંબર"><label>ફરિયાદ</label><textarea id="ctext" placeholder="ફરિયાદની વિગત લખો"></textarea><label>ફોટો</label><input id="cphoto" type="file" accept="image/*"><button onclick="addComplaint()">➕ સબમિટ / ફરિયાદ જમા કરો</button><div class="section">${list('complaint')}</div>`;
+ if(type==='committee') c=`<h2>👥 કમિટી મેમ્બરો</h2><div class="card"><div class="row"><b>પ્રમુખ</b><span>ભાવેશ પ્રજાપતિ<br>📱 8799462313</span></div><div class="row"><b>નાણાં વિભાગ</b><span>શૈલેશ સુથાર<br>📱 +919924993860</span></div><div class="row"><b>મંત્રી</b><span>ભદ્રેશ વ્યાસ<br>📱 +919727377471</span></div></div><p class="small">પ્રમુખ, નાણાં વિભાગ અને મંત્રીની માહિતી અપડેટ કરવામાં આવી છે.</p>`;
+ if(type==='meeting') c=`<h2>📋 મિટિંગ ફોલ્ડર</h2><label>તારીખ</label><input id="date" type="date"><label>સમય</label><input id="time" type="time"><label>સ્થળ</label><input id="place" placeholder="કોમન પ્લોટ / ગોગા મહારાજ"><label>વિષય / નોંધ</label><textarea id="mtxt"></textarea><button onclick="addMeeting()">➕ સબમિટ / મિટિંગ જમા કરો</button><div class="section">${list('meeting')}</div>`;
+ if(type==='reminder') c=`<h2>🔔 રિમાઈન્ડર ફોલ્ડર</h2><label>રિમાઈન્ડર</label><input id="rtext" placeholder="મેન્ટેનન્સ ભરવાનું યાદ કરવું"><label>તારીખ</label><input id="rdate" type="date"><button onclick="addReminder()">➕ સબમિટ / રિમાઈન્ડર જમા કરો</button><div class="section">${list('reminder')}</div>`;
+ if(type==='extra') c=`<h2>➕ વધારાનું મેન્ટેનન્સ ફોલ્ડર</h2><label>કામનું નામ</label><input id="etext" placeholder="જેમ કે ગોગા મહારાજનું કામ"><label>રકમ</label><input id="eamt" type="number" placeholder="₹"><label>નોંધ</label><textarea id="enote"></textarea><button onclick="addExtra()">➕ સબમિટ / જમા કરો</button><div class="section">${list('extra')}</div>`;
+ modalContent.innerHTML=c;modal.classList.add('open')
+}
+function list(type){
+ if(!data[type]?.length)return '<div class="empty">હજુ કોઈ નોંધ નથી.</div>';
+ return data[type].slice(-8).reverse().map((x,idx)=>{
+   const originalIndex=data[type].indexOf(x);
+   const action=type==='maintenance'
+      ? `<button class="secondary" onclick="markMaintenancePaid(${originalIndex})">✅ જમા / ડિલીટ</button>`
+      : `<button class="secondary" onclick="deleteRecord('${type}',${originalIndex})">🗑️ ડિલીટ</button>`;
+   return `<div class="row"><span>${esc(x.text||x.name||x.house||'નોંધ')}<br><small>${esc(x.sub||'')}</small></span><span style="display:flex;gap:6px;align-items:center"><span class="badge">${esc(x.status||x.amount||'નોંધ')}</span>${action}</span></div>`;
+ }).join('')
+}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function markMaintenancePaid(index){
+ const r=data.maintenance[index];
+ if(!r)return;
+ if(!confirm('આ મેન્ટેનન્સ જમા થઈ ગયું છે? જમા થયા પછી પેન્ડિંગ લિસ્ટમાંથી આપમેળે દૂર થશે.'))return;
+ data.maintenance.splice(index,1);
+ save();
+ openModal('maintenance');
+}
+function deleteRecord(type,index){
+ const item=data[type] && data[type][index];
+ if(!item)return;
+ if(!confirm('આ નોંધ ડિલીટ કરવી છે?'))return;
+ data[type].splice(index,1);
+ save();
+ openModal(type);
+}
+function addMaintenance(){
+  const house=document.getElementById('mhouse').value;
+  const name=document.getElementById('mname').value;
+  const phone=document.getElementById('mphone').value;
+  const amount=document.getElementById('mamt').value;
+  const finalAmount=Number(amount||1500); data.maintenance.push({house,name,phone,amount:finalAmount,text:name||house,sub:'ઘર '+house+' • '+phone,status:'બાકી ₹'+finalAmount});
+  save();openModal('maintenance');
+}
+function addComplaint(){
+  const house=document.getElementById('chouse').value;
+  const name=document.getElementById('cname').value;
+  const phone=document.getElementById('cphone').value;
+  const text=document.getElementById('ctext').value;
+  const photo=document.getElementById('cphoto');
+  data.complaint.push({house,name,phone,photo:photo && photo.files.length?'ફોટો જોડાયેલ':'',text:name||house,sub:'ઘર '+house+' • '+phone+' • '+text,status:'નવી'});
+  save();openModal('complaint');
+}
+function addMeeting(){
+  const d=document.getElementById('date').value;
+  const t=document.getElementById('time').value;
+  const p=document.getElementById('place').value;
+  const txt=document.getElementById('mtxt').value;
+  data.meeting.push({text:txt||'મિટિંગ',sub:d+' • '+t+' • '+p,status:'આયોજિત'});
+  save();openModal('meeting');
+}
+function addReminder(){
+  const txt=document.getElementById('rtext').value;
+  const d=document.getElementById('rdate').value;
+  data.reminder.push({text:txt,sub:d,status:'યાદ'});
+  save();openModal('reminder');
+}
+function addExtra(){
+  const txt=document.getElementById('etext').value;
+  const amt=document.getElementById('eamt').value;
+  const note=document.getElementById('enote').value;
+  data.extra.push({text:txt,sub:note,amount:amt,status:'₹'+amt});
+  save();openModal('extra');
+}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))closeModal()});load();renderResidents();
+
+const memberAccounts={};
+residents.forEach(r=>{memberAccounts["house"+String(r.house).padStart(3,"0")]={password:"shiv"+String(r.house).padStart(3,"0"),house:r.house,name:r.name};});
+let currentUser=null;
+function doLogin(){
+  const u=document.getElementById('loginUser').value.trim().toLowerCase();
+  const p=document.getElementById('loginPass').value;
+  const err=document.getElementById('loginError');
+  err.style.display='none';
+  let a=null,role='Member';
+
+  if(!u || !p){
+    err.textContent='User ID અને Password બંને નાખો.';
+    err.style.display='block';
+    return;
+  }
+
+  const saved=getStoredPassword(u);
+  let ok=false;
+
+  if(u==='pramukh'){
+    ok=(p===(saved || 'shiv2026'));
+    if(ok){a={house:0,name:'શિવ બંગલોઝ પ્રમુખ'};role='Admin';}
+  }else if(memberAccounts[u]){
+    ok=(p===(saved || memberAccounts[u].password));
+    if(ok){a=memberAccounts[u];role='Member';}
+  }
+
+  if(!a){
+    err.textContent='❌ User ID અથવા Password ખોટો છે.';
+    err.style.display='block';
+    return;
+  }
+
+  currentUser={user:u,house:a.house,name:a.name,role:role};
+  try{sessionStorage.setItem('shivLogin2026',JSON.stringify(currentUser));}catch(e){}
+  applyLogin(currentUser);
+}
+function applyLogin(x){
+  currentUser=x;
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('loggedUserName').textContent=x.name;
+  document.getElementById('loggedUserRole').textContent=x.role+(x.house?' • મકાન '+x.house:'');
+  document.querySelectorAll('.adminOnly').forEach(e=>e.style.display=x.role==='Admin'?'block':'none');
+  if(x.role==='Member'){
+    document.querySelectorAll('.memberOnly').forEach(e=>e.style.display='block');
+    document.querySelectorAll('.action').forEach(e=>e.style.display='');
+  }
+}
+function logout(){sessionStorage.removeItem('shivLogin2026');location.reload();}
+
+function getStoredPassword(user){
+  try{
+    const all=JSON.parse(localStorage.getItem('shivPasswords2026')||'{}');
+    return all[user] || null;
+  }catch(e){return null;}
+}
+function setStoredPassword(user,pass){
+  try{
+    const all=JSON.parse(localStorage.getItem('shivPasswords2026')||'{}');
+    all[user]=pass;
+    localStorage.setItem('shivPasswords2026',JSON.stringify(all));
+    return true;
+  }catch(e){return false;}
+}
+function showForgotPassword(){
+  document.getElementById('forgotUser').value=document.getElementById('loginUser').value.trim().toLowerCase();
+  document.getElementById('forgotNewPass').value='';
+  document.getElementById('forgotConfirmPass').value='';
+  document.getElementById('forgotMsg').textContent='';
+  document.getElementById('forgotScreen').classList.add('open');
+}
+function closeForgot(){document.getElementById('forgotScreen').classList.remove('open');}
+function resetPassword(){
+  const u=document.getElementById('forgotUser').value.trim().toLowerCase();
+  const np=document.getElementById('forgotNewPass').value;
+  const cp=document.getElementById('forgotConfirmPass').value;
+  const msg=document.getElementById('forgotMsg');
+  const validUser=(u==='pramukh') || /^house(00[1-9]|0[1-8][0-9]|092)$/.test(u);
+  if(!validUser){msg.textContent='❌ User ID મળ્યું નથી.';return;}
+  if(np.length<4){msg.textContent='❌ Password ઓછામાં ઓછા 4 અક્ષરનો રાખો.';return;}
+  if(np!==cp){msg.textContent='❌ બંને Password સરખા નથી.';return;}
+  if(setStoredPassword(u,np)){
+    msg.textContent='✅ Password બદલાઈ ગયો. હવે Login કરો.';
+    setTimeout(closeForgot,900);
+  }else msg.textContent='❌ Password સાચવી શકાયો નથી.';
+}
+
+function initLogin(){
+  try{
+    const x=JSON.parse(sessionStorage.getItem('shivLogin2026')||'null');
+    if(x)applyLogin(x);
+  }catch(e){sessionStorage.removeItem('shivLogin2026');}
+}
+function showInstallHelp(){
+  const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent);
+  const text=isIOS
+    ? 'Safari માં Share (↑) દબાવો → Add to Home Screen પસંદ કરો.'
+    : 'Chrome માં ⋮ મેનુ ખોલો → Add to Home screen / Install app પસંદ કરો.';
+  alert('📱 Home Screen પર શિવ બંગલોઝ ઉમેરવા:\n\n'+text+'\n\nનોંધ: HTML ફાઇલને Chrome/Safari માં ખોલ્યા પછી આ વિકલ્પ વાપરો.');
+}
+window.addEventListener('load',initLogin);
+</script>
+</body>
+</html>
